@@ -22,7 +22,7 @@ def trim(sample, fq1, fq2, index_seq):
                 insert_len = len(seq1.split(sub_seq)[0])
                 break
 
-        if len(seq1[:insert_len]) < 40 or len(seq2[:insert_len]) < 40:
+        if len(seq1[:insert_len]) < args.read_len or len(seq2[:insert_len]) < args.read_len:
             continue
         trim_fq1.write(
             f"@{read_name} 1{comment}\n{seq1[:insert_len]}\n+\n{qual1[:insert_len]}\n"
@@ -36,6 +36,7 @@ def trim(sample, fq1, fq2, index_seq):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Check microC fastq index.")
+    parser.add_argument("-l", "--read_len", type=int, default=60 ,help="seq min length")
     parser.add_argument("-f1", "--fastq1", type=str, help="R1 fastq file path")
     parser.add_argument("-f2", "--fastq2", type=str, help="R2 fastq file path")
     parser.add_argument(

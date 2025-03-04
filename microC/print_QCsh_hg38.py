@@ -14,8 +14,8 @@ if __name__ == "__main__":
 
     # 定义要写入文件的字符
     commands1 = f"""
-    bwa mem -5SP -T0 -t{args.threads} /mnt/hpc/home/xuxinran/REF/hg19/Sequence/BWAIndex/genome.fa {args.read1} {args.read2} -o {args.pre}_aligned.sam
-    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {args.threads} --nproc-out {args.threads} --chroms-path /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes {args.pre}_aligned.sam > {args.pre}_parsed.pairsam
+    bwa mem -5SP -T0 -t{args.threads} /mnt/hpc/home/xuxinran/REF/hg38/BWAIndex/genome {args.read1} {args.read2} -o {args.pre}_aligned.sam
+    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {args.threads} --nproc-out {args.threads} --chroms-path /mnt/hpc/home/xuxinran/REF/hg38/hg38.chrom.sizes {args.pre}_aligned.sam > {args.pre}_parsed.pairsam
     pairtools sort --tmpdir ./tmp --nproc {args.threads} {args.pre}_parsed.pairsam > {args.pre}_sorted.pairsam
     pairtools dedup --nproc-in {args.threads} --nproc-out {args.threads} --mark-dups --max-mismatch 3 --backend cython --output-stats {args.pre}_stats.txt --output {args.pre}_dedup.pairsam {args.pre}_sorted.pairsam
     python3 /mnt/hpc/home/xuxinran/microC/Micro-C-main/get_qc.py -p {args.pre}_stats.txt > {args.pre}_qc.txt
@@ -23,8 +23,8 @@ if __name__ == "__main__":
     """
 
     commands2 = f"""
-    bwa mem -5SP -T0 -t{args.threads} /mnt/hpc/home/xuxinran/REF/hg19/Sequence/BWAIndex/genome.fa {args.read1} {args.read2} -o {args.pre}_aligned.sam
-    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {args.threads} --nproc-out {args.threads} --chroms-path /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes {args.pre}_aligned.sam > {args.pre}_parsed.pairsam
+    bwa mem -5SP -T0 -t{args.threads} /mnt/hpc/home/xuxinran/REF/hg38/BWAIndex/genome {args.read1} {args.read2} -o {args.pre}_aligned.sam
+    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {args.threads} --nproc-out {args.threads} --chroms-path /mnt/hpc/home/xuxinran/REF/hg38/hg38.chrom.sizes {args.pre}_aligned.sam > {args.pre}_parsed.pairsam
     pairtools sort --tmpdir ./tmp --nproc {args.threads} {args.pre}_parsed.pairsam > {args.pre}_sorted.pairsam
     pairtools dedup --nproc-in {args.threads} --nproc-out {args.threads} --mark-dups --max-mismatch 3 --backend cython --output-stats {args.pre}_stats.txt --output {args.pre}_dedup.pairsam {args.pre}_sorted.pairsam
     python3 /mnt/hpc/home/xuxinran/microC/Micro-C-main/get_qc.py -p {args.pre}_stats.txt > {args.pre}_qc.txt
@@ -38,17 +38,17 @@ if __name__ == "__main__":
     samtools index {args.pre}_mapped_f.bam
     grep -v '^chrM' {args.pre}.macs2_peaks.narrowPeak > {args.pre}.macs2_peaks_f.narrowPeak
     rm {args.pre}_mapped.bam* {args.pre}.macs2_peaks.narrowPeak
-    bash /mnt/hpc/home/xuxinran/microC/HiChiP/enrichment_stats.sh -g /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes -b {args.pre}_mapped_f.bam -p {args.pre}.macs2_peaks_f.narrowPeak -x {args.pre}
+    bash /mnt/hpc/home/xuxinran/microC/HiChiP/enrichment_stats.sh -g /mnt/hpc/home/xuxinran/REF/hg38/hg38.chrom.sizes -b {args.pre}_mapped_f.bam -p {args.pre}.macs2_peaks_f.narrowPeak -x {args.pre}
     """
 
     commands3 = f"""
-    bwa mem -5SP -T0 -t{args.threads} /mnt/hpc/home/xuxinran/REF/hg19/Sequence/BWAIndex/genome.fa {args.read1} {args.read2} -o {args.pre}_aligned.sam
-    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {args.threads} --nproc-out {args.threads} --chroms-path /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes {args.pre}_aligned.sam > {args.pre}_parsed.pairsam
+    bwa mem -5SP -T0 -t{args.threads} /mnt/hpc/home/xuxinran/REF/hg38/BWAIndex/genome {args.read1} {args.read2} -o {args.pre}_aligned.sam
+    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {args.threads} --nproc-out {args.threads} --chroms-path /mnt/hpc/home/xuxinran/REF/hg38/hg38.chrom.sizes {args.pre}_aligned.sam > {args.pre}_parsed.pairsam
     pairtools sort --tmpdir ./tmp --nproc {args.threads} {args.pre}_parsed.pairsam > {args.pre}_sorted.pairsam
     pairtools dedup --nproc-in {args.threads} --nproc-out {args.threads} --mark-dups --max-mismatch 3 --backend cython --output-stats {args.pre}_stats.txt --output {args.pre}_dedup.pairsam {args.pre}_sorted.pairsam
     python3 /mnt/hpc/home/xuxinran/microC/Micro-C-main/get_qc.py -p {args.pre}_stats.txt > {args.pre}_qc.txt
     pairtools split --nproc-in 50 --nproc-out 50 --output-pairs {args.pre}_mapped.pairs --output-sam {args.pre}_unsorted.bam {args.pre}_dedup.pairsam
-    java -Djava.awt.headless=true -jar /mnt/hpc/home/xuxinran/microC/Micro-C-main/juicertools.jar pre --threads {args.threads} {args.pre}_mapped.pairs {args.pre}_contact_map.hic /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes
+    java -Djava.awt.headless=true -jar /mnt/hpc/home/xuxinran/microC/Micro-C-main/juicertools.jar pre --threads {args.threads} {args.pre}_mapped.pairs {args.pre}_contact_map.hic /mnt/hpc/home/xuxinran/REF/hg38/hg38.chrom.sizes
     java -Djava.awt.headless=true -jar /mnt/hpc/home/xuxinran/microC/Micro-C-main/juicertools.jar hiccups --cpu -f 0.1 --threads {args.threads} -r 5000,10000 --ignore-sparsity {args.pre}_contact_map.hic {args.pre}_hic.hiccups
     """
 

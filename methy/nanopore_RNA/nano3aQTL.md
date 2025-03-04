@@ -3,9 +3,10 @@
 /mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/1_read2apadb.ipynb
 
 python /mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/4_get_3aqtl.py -c chr1 -b /mnt/hpc/home/xuxinran/DirectSeq/data/zhaolin_240206/240201-zhaolin-RNA-merge/v0.7.2/bam/m6A/nano_merge_map0.bam -p ./nano_merge -s + --geno_size /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes -t 20 -f nano_merge_overlap.bed --snp_info /mnt/hpc/home/xuxinran/DirectSeq/refData_prepartCode/snp_info_singlesite.txt
+# 实际运行
+/mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/run2.sh
 
- # 实际运行
- /mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/run2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t polyA -o ./nano_merge --qqplot
  ```
 
  # 旧方法：自己识别
@@ -66,8 +67,5 @@ python /mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/4_get_3aqtl.py -c chr1 -b /mnt
 # 实际运行
 base run4.sh
 
-## fisher检验
-/mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/5_fdr.ipynb
-
-rm *_haplotype_chr*_tmp.csv
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t APA -o ./nano_merge --qqplot
 ```
