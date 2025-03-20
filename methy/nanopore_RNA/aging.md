@@ -80,3 +80,57 @@ bash run4.sh
 python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t m6A -o ./nano_yo_ds
 
 ```
+
+
+## 其他7种QTL分析流程
+```shell
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_pseU_1.sh
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_m5C_1.sh
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_i_1.sh
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_trans4_1.sh
+
+# APA
+/mnt/hpc/home/xuxinran/DirectSeq/nano3aqtl/1_read2apadb.ipynb
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_apa_2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t apa -o ./old
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t apa -o ./young
+
+# isoform
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_isoform_2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t isoform -o ./old
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t isoform -o ./young
+
+# promoter
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_promoter_2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t promoter -o ./old
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t promoter -o ./young
+
+# st
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_st_3.sh
+
+
+
+# pseU
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_pseU_2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/nanopseUqtl/3_mergeMODres.py -o ./old -f /mnt/hpc/home/xuxinran/REF/hg19/hg19.fa
+python /mnt/hpc/home/xuxinran/DirectSeq/nanopseUqtl/3_mergeMODres.py -o ./young -f /mnt/hpc/home/xuxinran/REF/hg19/hg19.fa
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_pseU_4.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t pseU -o ./old
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t pseU -o ./young
+
+# m5C
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_m5C_2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/nanom5Cqtl/3_mergeMODres.py -o ./old -f /mnt/hpc/home/xuxinran/REF/hg19/hg19.fa
+python /mnt/hpc/home/xuxinran/DirectSeq/nanom5Cqtl/3_mergeMODres.py -o ./young -f /mnt/hpc/home/xuxinran/REF/hg19/hg19.fa
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_m5C_4.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t m5C -o ./old
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t m5C -o ./young
+
+# i
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_i_2.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/nanoIqtl/3_mergeMODres.py -o ./old -f /mnt/hpc/home/xuxinran/REF/hg19/hg19.fa
+python /mnt/hpc/home/xuxinran/DirectSeq/nanoIqtl/3_mergeMODres.py -o ./young -f /mnt/hpc/home/xuxinran/REF/hg19/hg19.fa
+bash /mnt/hpc/home/xuxinran/DirectSeq/6_aging/run_i_4.sh
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t i -o ./old
+python /mnt/hpc/home/xuxinran/DirectSeq/sharedCode/merge_trait_SNP_res.py -t i -o ./young
+```
