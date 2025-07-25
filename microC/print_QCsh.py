@@ -2,7 +2,7 @@ import argparse
 from subprocess import call
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='8 Kinds of Nanopore Direct RNA QTL Colocalization.')
+    parser = argparse.ArgumentParser(description='')
     parser.add_argument("-o", "--outdir", type=str, help="output directory")
     parser.add_argument("-p", "--pre", type=str, default=0.05, help="output dir and prefix")
     parser.add_argument("-1", "--read1", type=str, help="read1 file path")

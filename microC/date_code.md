@@ -514,5 +514,14 @@ python /mnt/hpc/home/xuxinran/code/microC/print_QCsh.py -o ./ -t 110 -1 GM-2-scM
 python /mnt/hpc/home/xuxinran/code/microC/print_QCsh.py -o ./ -t 110 -1 scM-GM-300bp-250211_trim_index_1.fq -2 scM-GM-300bp-250211_trim_index_2.fq -p scM-GM-300bp-250211 --methods MicroC
 python /mnt/hpc/home/xuxinran/code/microC/print_QCsh.py -o ./ -t 110 -1 scMicroC-GM-250209_trim_index_1.fq -2 scMicroC-GM-250209_trim_index_2.fq -p scMicroC-GM-250209 --methods MicroC
 
+```
+
+
+## 所有数据合并分析
+```shell
+# hg19 call loop
+python /mnt/hpc/home/xuxinran/code/microC/print_QCsh.py -o ./ -t 110 -1 /mnt/hpc/home/xuxinran/wangxueqi/MicroC_pool_young_old/pool-Micro-C/AAmerge_all_old_rawdata/old_po_merge_R1_001.fastq.gz -2 /mnt/hpc/home/xuxinran/wangxueqi/MicroC_pool_young_old/pool-Micro-C/AAmerge_all_old_rawdata/old_po_merge_R2_001.fastq.gz -p old --methods loop
+python /mnt/hpc/home/xuxinran/code/microC/print_QCsh.py -o ./ -t 110 -1 /mnt/hpc/home/xuxinran/wangxueqi/MicroC_pool_young_old/pool-Micro-C/merge_all_young_new_rawdata/young_po_merge.R1.fastq.gz -2 /mnt/hpc/home/xuxinran/wangxueqi/MicroC_pool_young_old/pool-Micro-C/merge_all_young_new_rawdata/young_po_merge.R2.fastq.gz -p yo --methods loop
+
 
 ```

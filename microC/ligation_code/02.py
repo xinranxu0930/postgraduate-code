@@ -3,9 +3,9 @@ import pysam
 import numpy as np
 import glob
 
-pairtools_res = "no-GM-K27ac-2_L7_G028_valid_id.txt"
-o = "no-GM-K27ac-2_L7_G028_dis.csv"
-sam_files = glob.glob("no-GM-K27ac-2_L7_G028_aligned_ligation_sort_tmp.bam")
+pairtools_res = "TNCS_valid_id.txt"
+o = "TNCS_dis.csv"
+sam_files = glob.glob("TNCS_aligned_ligation_sort_tmp.bam")
 
 df = pd.read_csv(pairtools_res,sep="\t",header=None)
 df.columns = ["readID","chrom1","s1","chrom2","s2","strand1","strand2"]
