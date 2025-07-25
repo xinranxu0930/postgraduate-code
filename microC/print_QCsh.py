@@ -48,8 +48,10 @@ if __name__ == "__main__":
     pairtools dedup --nproc-in {args.threads} --nproc-out {args.threads} --mark-dups --max-mismatch 3 --backend cython --output-stats {args.pre}_stats.txt --output {args.pre}_dedup.pairsam {args.pre}_sorted.pairsam
     python3 /mnt/hpc/home/xuxinran/microC/Micro-C-main/get_qc.py -p {args.pre}_stats.txt > {args.pre}_qc.txt
     pairtools split --nproc-in 50 --nproc-out 50 --output-pairs {args.pre}_mapped.pairs --output-sam {args.pre}_unsorted.bam {args.pre}_dedup.pairsam
-    java -Djava.awt.headless=true -jar /mnt/hpc/home/xuxinran/microC/Micro-C-main/juicertools.jar pre --threads {args.threads} {args.pre}_mapped.pairs {args.pre}_contact_map.hic /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes
-    java -Djava.awt.headless=true -jar /mnt/hpc/home/xuxinran/microC/Micro-C-main/juicertools.jar hiccups --cpu -f 0.1 --threads {args.threads} -r 5000,10000 --ignore-sparsity {args.pre}_contact_map.hic {args.pre}_hic.hiccups
+    cooler cload pairs -c1 2 -p1 3 -c2 4 -p2 5 /mnt/hpc/home/xuxinran/REF/hg19/hg19.chrom.sizes:1000 {args.pre}_mapped.pairs {args.pre}_mapped.1kb.cool
+    cooler balance --nproc 50 {args.pre}_mapped.1kb.cool
+    cooltools expected-cis -p 50 -o {args.pre}_expected.1kb.tsv {args.pre}_mapped.1kb.cool
+    python call_1k_loop.py {args.pre}_mapped.1kb.cool {args.pre}_expected.1kb.tsv {args.pre}_loops.tsv --max-loci-separation 3000000 -n 16
     """
 
     if args.methods == "MicroRUN":
